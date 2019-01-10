@@ -1,5 +1,6 @@
 {
   "projects": {
-    "lyj-shop": "lyj-shop"
+    "lyj-shop": "lyj-shop",
+    "default": "lyj-shop"
   }
 }

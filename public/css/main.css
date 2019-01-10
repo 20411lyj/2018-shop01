@@ -1,1 +1,7 @@
 @import 'base.css';
+
+.wrap {max-width:1400px; margin:auto;}
+.logo {float: left;}
+.top_navs {padding:2rem 0;}
+.top_nav {float: right;}
+.top_nav > li {float: left; margin-right: 1rem;}
