@@ -1,3 +1,16 @@
+// Firebase Innit
+var config = {
+    apiKey: "AIzaSyCk6I7JwHCOf9yxBgPPxHcnyHG-6Urf7Yo",
+    authDomain: "lyj-shop.firebaseapp.com",
+    databaseURL: "https://lyj-shop.firebaseio.com",
+    projectId: "lyj-shop",
+    storageBucket: "lyj-shop.appspot.com",
+    messagingSenderId: "488985514554"
+  };
+  firebase.initializeApp(config);
+
+
+
 // top_nav hover 이벤트
 $(".top_icon").mouseenter(function(){
 	$(this).children("img").css({"opacity":.7});
@@ -29,3 +42,6 @@ $(".rt_bg").click(function(e){
 	e.stopPropagation();
 	$(".rt_cont .fa-close").trigger("click");
 });
+
+//메인 네비 /.navs
+/* firebase.database().ref("root/test").push({test:"테스트"}).key; */
