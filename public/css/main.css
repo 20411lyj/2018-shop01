@@ -10,6 +10,13 @@
 .country {margin-top:1.5em;}
 .country > span {width:40px; height:40px; line-height:40px; margin:4px 0; cursor:pointer;}
 .country > span:hover {background-color: rgb(104, 211, 119) !important;}
+.rt_arrow {transition: padding-left 0.3s;}
+.rt_arrow:hover {padding-left:20px; background: url(../img/arrow_right.png) no-repeat left center;}
+.rt_arrow a {text-decoration: none;}
+.rt_arrow a:link{color:#666;}
+.rt_arrow a:visited{color:#666;}
+.rt_arrow a:hover{color:#333;}
+.rt_arrow a:active{color:#333;}
 
 /***** 상단네비 / top_navs *****/
 .logo {float:left;}
@@ -22,16 +29,20 @@
 .top_nav > li:nth-child(2) > img {margin-right:0.75rem; margin-top:0.25rem;}
 .top_nav > li:nth-child(3) {padding-top:0.5rem; position:relative;}
 .top_nav > li:nth-child(3) > .w3-badge {position:absolute; color:#666; padding:0.25rem 0.5rem; top:-1rem;}
-.top_nav > li:nth-child(4) {padding-top:0.5rem; margin-right: 0;}
+.top_nav > li:nth-child(4) {padding-top:0.5rem; margin-right:0;}
 .top_nav .fa-shopping-bag {font-size:1.25rem; color:#222;}
 .top_nav .fa-bars {font-size:1.25rem; color:#222;}
 
-/*********메인네비 / navs**********/
-.navs {width:100%; background-color: #222;  font-size: 0.75rem; }
-.navs > ul > li {height:54px; cursor: pointer;}
-.navs .nav{float: left; line-height: 54px; margin-left: 3em; color:#aaa; font-weight: 600;}
+/***** 메인네비 / navs *****/
+.navs {width:100%; background-color:#222; font-size:0.75rem;}
+.navs > ul > li {height:54px; cursor:pointer;}
+.navs .nav {float:left; color:#aaa; line-height:54px; margin-right:3em; font-weight:600; position: relative;}
+.navs .nav_sub {position: absolute; min-width:200px; min-height:200px; background-color:white; box-shadow: 0 0 10px rgba(0,0,0,.5); display:none; top:80px;}
+.nav:nth-child(1) > .nav_sub {width:400px; padding:15px 0;}
+.nav:nth-child(1) > .nav_sub > li{float: left; width:150px; height:30px; line-height: 30px;
+border-bottom:1px solid #ccc; margin:5px 20px; overflow: hidden;}
 .navs .nav:hover {color:#fff;}
-.navs .search{float:right; height: 38px; margin-top:8px; background-color: #fff; border-radius: 19px;}
-.navs .in_search{height:24px; width:120px; margin:8px 12px 0 20px; border:none;}
-.navs .in_search:focus{outline:none;}
-.navs .fa-search{font-size: 1.25em; margin-right: 20px;}
+.navs .search {float:right; height:38px; margin-top:8px; background-color:#fff; border-radius:19px;}
+.navs .in_search {height:24px; width:120px; margin:8px 12px 0 20px; border:none;}
+.navs .in_search:focus {outline:none;}
+.navs .fa-search {font-size:1.25em; margin-right:20px;}
