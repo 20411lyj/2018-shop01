@@ -1,4 +1,5 @@
-// Firebase Innit
+const log = console.log;
+// Firebase Init / github에서 복사하신 분은 꼭 자신의 내용으로 바꿔주세요.
 var config = {
     apiKey: "AIzaSyCk6I7JwHCOf9yxBgPPxHcnyHG-6Urf7Yo",
     authDomain: "lyj-shop.firebaseapp.com",
@@ -7,9 +8,12 @@ var config = {
     storageBucket: "lyj-shop.appspot.com",
     messagingSenderId: "488985514554"
   };
+  
   firebase.initializeApp(config);
 //Firebase Init
 var db = firebase.database();
+
+//카테고리 HOME 생성
 db.ref("root/home").on("child_added", homeAdd);
 function homeAdd(data) {
 	var html = `
@@ -18,6 +22,50 @@ function homeAdd(data) {
 	</li>`;
 	$(".nav_sub").eq(0).append(html);
 }
+
+// 카테고리 SHOP 생성 - Ajax/json 통신
+$.ajax({
+	type: "get",
+	url: "../json/shop.json",
+	data: {},
+	dataType: "json",
+	success: function(data) {
+		var html = `<div class="shop_cates wrap clear">`;
+		for(var i=0; i<data.cates.length; i++){
+			html += `<ul>
+			<li class="shop_cate_tit">${data.cates[i].tit}</li>
+			<li>
+				<ul class="shop_cate_names">`;
+				for(var j=0; j<data.cates[i].data.length; j++) {
+					html += `
+					<li class="shop_cate_name rt_arrow">
+					<a href="${data.cates[i].data[j].link}" target="${data.cates[i].data[j].target}">
+					${data.cates[i].data[j].name}</a>
+					</li>`;
+				}
+			html +=	`</ul></li></ul>`;
+		}
+		html += `</div><ul class="shop_prds wrap clear">`;
+		for(var i=0; i<data.prds.length; i++) {
+			html += `<li class="shop_prd">
+				<a href="${data.prds[i].link}" target="${data.prds[i].target}">
+				<img src="${data.prds[i].src}" class="img">
+				</a>
+			</li>`;
+		}
+		html += `</ul>`;
+		$(".nav_sub").eq(1).append(html);
+	},
+	error: function(xhr) {
+		log(xhr);
+	}
+});
+
+// window.resize()구현 
+$(window).resize(function(){
+	
+}).trigger("resize");
+
 
 // top_nav hover 이벤트
 $(".top_icon").mouseenter(function(){

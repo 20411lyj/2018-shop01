@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/w3.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/blog.css">
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/imagesloaded.pkgd.min.js"></script>
   <script src="../js/masonry.pkgd.min.js"></script>
@@ -20,22 +20,19 @@
 </head>
 <body>
     <div w3-include-html="header.html"></div>
-        <div class="page" id="page1">
-            <div>
-                <input type="text" name="title1" id="title1" class="w3-input w3-border w3-show-inline-block" placeholder="title">
-                <input type="text" name="link1" id="link1" class="w3-input w3-border w3-show-inline-block" placeholder="link">
-                <select name="target1" id="target1" class="w3-select w3-border w3-show-inline-block">
-                    <option value="_blank" selected>새창</option>
-                    <option value="_self">현재창</option>
-                </select>
-                <button type="button" id="bt1_save" class="w3-indigo w3-button">등록</button>
+        <div class="page">
+            <div class="wr_wrap">
+                <input id="mc_in" type="text" class="w3-input w3-border w3-show-inline-block" placeholder="메인카테고리 이름">
+                <button id="mc_save" class="w3-button w3-indigo">저장</button>
+                <select id="mc_sel" class="w3-select w3-border w3-show-inline-block"></select>
+                
             </div>
-            <ul id="homes">
+            <ul id="cont_wrap">
     
             </ul>
         </div>
        
         <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-        <script src="../js/admin.js"></script>
+        <script src="../js/blog.js"></script>
     </body>
 </html>

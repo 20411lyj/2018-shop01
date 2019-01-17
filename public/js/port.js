@@ -2,7 +2,6 @@
 //HTML Header Includer
 w3.includeHTML(function(){
 	$(".navs li").click(function(){
-		
 		location.href = $(this).data("src");
 	});
 });
