@@ -1,7 +1,7 @@
 @import 'base.css';
 /***** 공통사항 *****/
 body {min-height:3000px;}
-.wrap {width:100%; max-width:1400px; margin:auto; position:relative;}
+.wrap {width:100%; max-width:1170px; margin:auto; position:relative;}
 .modals {position:fixed; z-index:9999; display:none;}
 .rt_bg {width:100%; height:100%; background-color:#000; top:0; left:0;}
 .rt_cont {width:240px; height:100%; background-color:#fff; text-align:center; top:0; right:0; font-size:0.75rem;}
@@ -11,7 +11,7 @@ body {min-height:3000px;}
 .country {margin-top:1.5em;}
 .country > span {width:40px; height:40px; line-height:40px; margin:4px 0; cursor:pointer;}
 .country > span:hover {background-color: rgb(104, 211, 119) !important;}
-.rt_arrow {transition:padding-left 0.2s;}
+.rt_arrow {transition:padding-left 0.2s; height:2rem; line-height:2rem; border-bottom:1px solid #ccc; cursor:pointer; font-size:0.75rem; font-weight:600;}
 .rt_arrow:hover {padding-left:20px; 
 	background:url(../img/arrow_right.png) no-repeat left center;}
 .rt_arrow a {text-decoration:none;}
@@ -19,6 +19,7 @@ body {min-height:3000px;}
 .rt_arrow a:visited {color:#666;}
 .rt_arrow a:hover {color:#333;}
 .rt_arrow a:active {color:#333;}
+.size_ani:hover {transform:scale(1.1); transition-duration:1s;}
 
 /***** 상단네비 / top_navs *****/
 .logo {float:left;}
@@ -39,10 +40,15 @@ body {min-height:3000px;}
 .navs {width:100%; background-color:#222; font-size:0.75rem;}
 .navs > ul > li {height:54px; cursor:pointer;}
 .navs > ul > .nav {float:left; color:#aaa; line-height:54px; margin-right:3em; font-weight:600;}
-.navs .nav_sub {position: absolute; min-width:200px; min-height:200px; background-color:white; box-shadow: 0 0 10px rgba(0,0,0,.5); display:none; top:80px;}
+.navs .nav_sub {position:absolute; min-width:200px; min-height:200px; background-color:white; box-shadow: 0 0 10px rgba(0,0,0,.5); display:none; top:80px; z-index:9;}
+.navs .nav:hover {color:#fff;}
+.navs .search {float:right; height:38px; margin-top:8px; background-color:#fff; border-radius:19px;}
+.navs .in_search {height:24px; width:120px; margin:8px 12px 0 20px; border:none;}
+.navs .in_search:focus {outline:none;}
+.navs .fa-search {font-size:1.25em; margin-right:20px;}
 /***** 카테고리 HOME *****/
 .nav:nth-child(1) > .nav_sub {width:400px; padding:1rem 0;}
-.nav:nth-child(1) > .nav_sub > li {float:left; width:160px; height:30px; line-height:30px; border-bottom:1px solid #ccc; margin:5px 20px; overflow:hidden;}
+.nav:nth-child(1) > .nav_sub > li {float:left; width:10rem; margin:0.5rem 1rem; overflow:hidden;}
 /***** 카테고리 SHOP *****/
 .nav:nth-child(2) > .nav_sub {width:100%; padding:2rem; left:0;}
 .shop_cates > ul {width:21%; margin:0 2%; float:left; font-size:0.75rem;}
@@ -57,9 +63,13 @@ body {min-height:3000px;}
 .blogs > :last-child {width:30%; float:right;}
 .grid {display:flex; flex-wrap:wrap;}
 .grid-item {width:50%; padding:3%; float:left;}
+/***** 카테고리 PORT *****/
+.nav:nth-child(4) > .nav_sub {padding:1rem 0;}
+.nav:nth-child(4) > .nav_sub > li {width:10rem; margin:0.5rem 1rem;}
 
-.navs .nav:hover {color:#fff;}
-.navs .search {float:right; height:38px; margin-top:8px; background-color:#fff; border-radius:19px;}
-.navs .in_search {height:24px; width:120px; margin:8px 12px 0 20px; border:none;}
-.navs .in_search:focus {outline:none;}
-.navs .fa-search {font-size:1.25em; margin-right:20px;}
+/***** 메인 (좌측네비 및 배너) / mains *****/
+.mains {margin-top:2rem;}
+.lefts {width:18%; float:left; padding-right:2rem;}
+.bans {width:82%; float:right; position: relative;}
+.ban {width:100%; position: relative;}
+.ban > li {width:100%; position: absolute;}

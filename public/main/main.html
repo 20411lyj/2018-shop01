@@ -10,71 +10,107 @@
 	<title></title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/w3.css">
+	<link rel="stylesheet" href="../css/cycle2.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/main.css">
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/imagesloaded.pkgd.min.js"></script>
   <script src="../js/masonry.pkgd.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-</head>
+<!--   <script src="../js/jquery.cycle2.min.js"></script>
+ --></head>
 <body>
-  <!--상단 네비 / top-->
-    <div class="top_navs wrap clear">
-      <div class="logo"><img src="../img/logo.png"></div>
-      <ul class="top_nav">
-        <li class="top_icon">
-           <img src="../img/icon-1.png" class="fl">
-           <span>FREE DELIVERY <br>
-              FROM $ 250</span>
-        </li>
-        <li class="top_icon">
-            <img src="../img/icon-2.png" class="fl">
-            <span>MONEY BACK <br>
-                GUARANTEED</span>
-        </li>
-        <li>
-          <span class="w3-badge w3-light-grey">0</span>
-          <span class="fa fa-shopping-bag"></span> CART
-        </li>
-        <li>
-          <span class="fa fa-bars"></span>
-        </li>
-      </ul>
-    </div>
-    <!--메인 네비 /navs-->
-    <div class="navs">
-        <ul class="wrap clear">
-          <li class="nav rel">HOME<ul class="nav_sub clear"></ul></li>
-          <li class="nav">SHOP<ul class="nav_sub clear" style="left:0;"></ul></li>
-          <li class="nav">BLOG<ul class="nav_sub clear"></ul></li>
-          <li class="nav rel">PORTFOLIO<ul class="nav_sub clear"></ul></li>
-          <li class="nav">CONTACT<ul class="nav_sub clear"></ul></li>		
-          <li class="search">
-            <input type="text" name="search" class="in_search" placeholder="search">
-            <span class="fa fa-search"></span>
-          </li>		
-        </ul>
-      </div>
-    <!--오른쪽 날개 / rt_wings-->
-    <div class="modals rt_bg"></div>
-    <div class="modals rt_cont">
-      <span class="fa fa-close"></span>
-      <ul class="mypages">
-        <li>MY ACCOUNT</li>
-        <li>CHECHOUT</li>
-        <li>WISHLIST</li>
-      </ul>
-      <div class="country">
-        <span class="w3-badge w3-light-grey">USD</span>
-        <span class="w3-badge w3-light-grey">EUR</span>
-        <span class="w3-badge w3-light-grey">GBP</span>
-        <br>
-        <span class="w3-badge w3-light-grey"><img src="../img/eng.png"></span>
-        <span class="w3-badge w3-light-grey"><img src="../img/fra.jpg"></span>
-        <span class="w3-badge w3-light-grey"><img src="../img/arab.jpg"></span>
-      </div>
-    </div>
-     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-    <script src="../js/main.js"></script>
+	<!-- 상단 네비 / top_navs -->
+	<div class="top_navs wrap clear">
+		<div class="logo"><img src="../img/logo.png"></div>
+		<ul class="top_nav">
+			<li class="top_icon">
+				<img src="../img/icon-1.png" class="fl">
+				<span class="fl">FREE DELIVERY<br>
+					FROM $ 250</span>
+			</li>
+			<li class="top_icon">
+				<img src="../img/icon-2.png" class="fl">
+				<span class="fl">MONEY BACK<br>
+					GUARANTEED</span>
+			</li>
+			<li>
+				<span class="w3-badge w3-light-grey">0</span>
+				<span class="fa fa-shopping-bag"></span> CART
+			</li>
+			<li>
+				<span class="fa fa-bars"></span>
+			</li>
+		</ul>
+	</div>
+	<!-- 메인 네비 / navs -->
+	<div class="navs">
+		<ul class="wrap clear">
+			<li class="nav rel">HOME<ul class="nav_sub clear"></ul>
+			</li>
+			<li class="nav">SHOP<ul class="nav_sub clear"></ul>
+			</li>
+			<li class="nav">BLOG
+				<ul class="nav_sub blogs clear">
+					<li class="grid"></li>
+					<li>
+						<img src="../img/menu-blog.jpg" class="img">
+					</li>
+				</ul>
+			</li>
+			<li class="nav rel">PORTFOLIO<ul class="nav_sub clear"></ul></li>
+			<li class="nav">CONTACT</li>
+			<li class="search">
+				<input type="text" name="search" class="in_search" placeholder="search">
+				<span class="fa fa-search"></span>
+			</li>
+		</ul>
+	</div>
+	<!-- 메인 배너 및 좌측 네비 / mains -->
+	<ul class="mains wrap clear">
+		<li class="lefts"><ul class="left"></ul></li>
+		<li class="bans">
+			<ul class="ban cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="5000" data-cycle-slides="> li" data-pause-on-hover="true" data-cycle-speed=2000>
+				<div class="cycle-pager"></div>
+				<li><img src="../img/slider-7.jpg" class="img"></li>
+				<li><img src="../img/slider-8.jpg" class="img"></li>
+				<li><img src="../img/slider-12.jpg" class="img"></li>
+			</ul>	
+		</li>
+		<!-- <li class="bans">
+			<ul class="ban cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="5000" data-cycle-slides="> li" data-pause-on-hover="true" data-cycle-speed=2000>
+				<div class="cycle-pager"></div>
+				<li><img src="../img/slider-7.jpg" class="img"></li>
+				<li><img src="../img/slider-8.jpg" class="img"></li>
+				<li><img src="../img/slider-12.jpg" class="img"></li>
+			</ul>	
+		</li> -->
+			
+		</li>
+	</ul>
+
+
+	<!-- 오른쪽 날개 / rt_wings -->
+	<div class="modals rt_bg"></div>
+	<div class="modals rt_cont">
+		<span class="fa fa-close"></span>
+		<ul class="mypages">
+			<li>MY ACCOUNT</li>
+			<li>CHECKOUT</li>
+			<li>WISHLIST</li>
+		</ul>
+		<div class="country">
+			<span class="w3-badge w3-light-grey">USD</span>
+			<span class="w3-badge w3-light-grey">EUR</span>
+			<span class="w3-badge w3-light-grey">GBP</span>
+			<br>
+			<span class="w3-badge w3-light-grey"><img src="../img/eng.png"></span>
+			<span class="w3-badge w3-light-grey"><img src="../img/fra.jpg"></span>
+			<span class="w3-badge w3-light-grey"><img src="../img/arab.jpg"></span>
+		</div>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+	<script src="../js/main.js"></script>
 </body>
+
 </html>
