@@ -182,22 +182,135 @@ $(".rt_bg").click(function(e){
 	$(".rt_cont .fa-close").trigger("click");
 });
 
-//메인베너 / .bans
+//메인배너 / .bans
 fadeShow();
 function fadeShow() {
 	var $wrap = $(".ban");
+	var $slide = $(".ban > li");	
+	var depth = 10;									//z-index
+	var now = 0;										//Animation 대상
+	var speed = 500;								//Animation 속도(animation-duration)
+	var timeout = 3000;							//Animaton 간격(animation-delay)
+	var end = $slide.length - 1;		//마지막 객체의 index값
+	var interval;										//Animation 간격에 맞춰 특정된 함수를 실행한다.
+	var hei;
+	//Pager 초기화
+	$slide.each(function(){
+		$(this).css({"position":"absolute", "top":0});	//$(".ban > li")의 css 설정(포지션 및 top값)
+		$(".cycle-pager").append("<span>●</span>");// 사이클 페이저 생성
+	});
+	$(".cycle-pager span").click(function(){ //페이저를 클릭하면 다음과같은 함수실행
+		now = $(this).index(); //$(".cycle-pager span")의 순번을 now에 저장 
+		fadeAni();
+		clearInterval(interval); //초기화
+		interval = setInterval(fadeAni, timeout); //fadeAni함수와 timeout변수 호출
+	});
+	$(".bans").height($slide.eq(0).height());//$(".ban > li");의 0번째 높이을 $(".bans").height에 저장
+	$(window).resize(function(){ //리사이즈 함수 
+		$(".bans").height($slide.eq(now).height());//$(".ban > li")의 클릭당한 순번의 높이를 $(".bans")에 저장
+	});
+	//최초 실행
+	interval = setInterval(fadeAni, timeout);
+	function fadeAni() {//fadeAni함수
+		$(window).trigger("resize"); //창크기를 한번만 리사이즈
+		$(".cycle-pager span").removeClass("cycle-pager-active"); //사이클 페이저 span의 cycle-pager-active클래스의 삭제
+		$(".cycle-pager span").eq(now).addClass("cycle-pager-active");//클릭당한 사이클 페이저 span에 클래스cycle-pager-active의 추가
+		var hei = $slide.eq(now).height(); //$(".ban > li")의 클릭당한 li의 높이를 변수 hei에 저장
+		$(".bans").stop().animate({"height":hei+"px"}, speed); // bans클래스에 변수hei+px값의 높이와 속도를 호출
+		$slide.eq(now).css({"z-index":depth++, "opacity":0}).stop().animate({"opacity":1}, speed, function(){
+			//클릭당한 li의 순번에 z-index가 증가하면서 이미지페이드의 css를 만들고 투명도1과 속도 및 함수를 호출
+			if(now == end) now = 0; //now번째와 end번째가 같으면 now는 초기화 
+			else now++; //아니라면 now는 증가
+		});
+	}
+}
+//horzShow();
+function horzShow() {
+	//맨 앞의 li를 복사해서 $(".ban")맨 뒤에 붙여라
+	$(".ban").append($(".ban > li").eq(0).clone());	
+	var $wrap = $(".ban");
 	var $slide = $(".ban > li");
-	var depth = 100;
-	var now = 0;
+	var now = 1;
 	var speed = 500;
-	var timeout = 3000; 
+	var timeout = 3000;
 	var end = $slide.length - 1;
-	var interval = setInterval(fadeAni, timeout);
-	function fadeAni(){
-		$slide.eq(now).css({"z-index" : depth++, "opacity" : 0}).stop().animate({"opacity":1}, speed,
-		function(){
-			if(now == end) now = 0;
+	var interval;
+	var hei = 0;
+	//초기화
+	$(window).resize(function(){
+		hei = 0;
+		$slide.each(function(i){
+			//$(".ban > li")중 가장 큰 height 구함
+			if(hei < $(this).height()) hei = $(this).height();	
+		});
+		$wrap.height(hei);		// $(".ban")의 높이를 넣어준다.
+	}).trigger("resize");
+	$slide.each(function(i){
+		$(this).css({"left":(i*100)+"%", "position":"absolute"});
+		if(i<end) $(".cycle-pager").append("<span>●</span>");
+	});
+	$(".cycle-pager span").click(function(){
+		now = $(this).index();
+		horzAni();
+		clearInterval(interval);
+		interval = setInterval(horzAni, timeout);
+	});
+	interval = setInterval(horzAni, timeout);
+	function horzAni() {
+		if(now == end) pnow = 0;
+		else pnow = now;
+		$(".cycle-pager span").removeClass("cycle-pager-active");
+		$(".cycle-pager span").eq(pnow).addClass("cycle-pager-active");
+		$wrap.stop().animate({"left":(-now*100)+"%"}, speed, function(){
+			$(window).trigger("resize");
+			if(now == end) {
+				$wrap.css({"left":0});
+				now = 1;
+			}
 			else now++;
-		});	
-	}  
-};
+		});
+	}	
+}
+//vertShow();
+function vertShow() {
+	$(".ban").append($(".ban > li").eq(0).clone());
+	var $wrap = $(".ban");
+	var $slide = $(".ban > li");
+	var now = 1;
+	var speed = 500;
+	var timeout = 3000;
+	var end = $slide.length - 1;
+	var interval;
+	var hei = 1000;
+	//초기화
+	$slide.each(function(i){
+		if(i<end) $(".cycle-pager").append("<span>●</span>");
+	});//0,1,2까지 사이클 페이저 생성
+	$(".cycle-pager span").click(function(){
+		now = $(this).index();
+		vertAni();
+		clearInterval(interval);
+		interval = setInterval(vertAni, timeout);
+	});
+	interval = setInterval(vertAni, timeout);
+	$(".bans").height($slide.eq(0).height());
+	$(window).resize(function(){
+		$(".bans").height($slide.eq(now).height());
+	});
+	function vertAni() {
+		if(now == end) pnow = 0;
+		else pnow = now;
+		$(".cycle-pager span").removeClass("cycle-pager-active");
+		$(".cycle-pager span").eq(pnow).addClass("cycle-pager-active");
+		var top = $slide.eq(now).position().top;
+		var hei = $slide.eq(now).height();
+		$(".bans").stop().animate({"height":hei+"px"}, speed);
+		$wrap.stop().animate({"top":-top+"px"}, speed, function(){
+			if(now == end) {
+				$wrap.css({"top":0});
+				now = 1;
+			}
+			else now++;
+		});
+	}
+}

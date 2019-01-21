@@ -21,6 +21,13 @@ body {min-height:3000px;}
 .rt_arrow a:active {color:#333;}
 .size_ani:hover {transform:scale(1.1); transition-duration:1s;}
 
+.cycle-pager { text-align: center; width: 100%; z-index: 9000; position: absolute; bottom: 10px; overflow: hidden;}
+.cycle-pager span { font-family: arial; font-size: 30px; 
+	display: inline-block; color: rgb(85, 85, 85); cursor: pointer; }
+.cycle-pager span.cycle-pager-active { color: rgb(224, 47, 100);}
+.cycle-pager > * { cursor: pointer;}
+
+
 /***** 상단네비 / top_navs *****/
 .logo {float:left;}
 .top_navs {padding:2rem 0;}
@@ -70,6 +77,6 @@ body {min-height:3000px;}
 /***** 메인 (좌측네비 및 배너) / mains *****/
 .mains {margin-top:2rem;}
 .lefts {width:18%; float:left; padding-right:2rem;}
-.bans {width:82%; float:right; position: relative;}
+.bans {width:82%; float:right; position: relative; overflow: hidden;}
 .ban {width:100%; position: relative;}
 .ban > li {width:100%; position: absolute;}
