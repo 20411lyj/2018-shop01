@@ -1,5 +1,9 @@
 const log = console.log;
-//$.ajax() 객체화
+//모든 이미지가 서버로 부터 전송이 완료되면 리사이즈 이벤트를 한번만 실행하여 
+//이미지 높이를 계산하게 된다.
+$("body").imagesLoaded(function(){
+	$(window).trigger("resize");
+});
 var Ajax = (function(){
 	function Ajax(url, fn, opts) {
 		var obj = this;
@@ -132,13 +136,10 @@ function leftAjax(data) {
 	}
 }
 
-
-
 // window.resize()구현 
 $(window).resize(function(){
 	
 }).trigger("resize");
-
 
 // top_nav hover 이벤트
 $(".top_icon").mouseenter(function(){
@@ -196,31 +197,44 @@ function fadeShow() {
 	var hei;
 	//Pager 초기화
 	$slide.each(function(){
-		$(this).css({"position":"absolute", "top":0});	//$(".ban > li")의 css 설정(포지션 및 top값)
-		$(".cycle-pager").append("<span>●</span>");// 사이클 페이저 생성
+		$(this).css({"position":"absolute", "top":0});	//$(".ban > li")의 css 설정
+		$(".cycle-pager").append("<span>●</span>");
 	});
-	$(".cycle-pager span").click(function(){ //페이저를 클릭하면 다음과같은 함수실행
-		now = $(this).index(); //$(".cycle-pager span")의 순번을 now에 저장 
+	$(".cycle-pager span").click(function(){
+		now = $(this).index();
 		fadeAni();
-		clearInterval(interval); //초기화
-		interval = setInterval(fadeAni, timeout); //fadeAni함수와 timeout변수 호출
+		clearInterval(interval);
+		interval = setInterval(fadeAni, timeout);
 	});
-	$(".bans").height($slide.eq(0).height());//$(".ban > li");의 0번째 높이을 $(".bans").height에 저장
-	$(window).resize(function(){ //리사이즈 함수 
-		$(".bans").height($slide.eq(now).height());//$(".ban > li")의 클릭당한 순번의 높이를 $(".bans")에 저장
+	$(".bans").height($slide.eq(0).height());
+	$(window).resize(function(){
+		$(".bans").height($slide.eq(now).height());
 	});
 	//최초 실행
 	interval = setInterval(fadeAni, timeout);
-	function fadeAni() {//fadeAni함수
-		$(window).trigger("resize"); //창크기를 한번만 리사이즈
-		$(".cycle-pager span").removeClass("cycle-pager-active"); //사이클 페이저 span의 cycle-pager-active클래스의 삭제
-		$(".cycle-pager span").eq(now).addClass("cycle-pager-active");//클릭당한 사이클 페이저 span에 클래스cycle-pager-active의 추가
-		var hei = $slide.eq(now).height(); //$(".ban > li")의 클릭당한 li의 높이를 변수 hei에 저장
-		$(".bans").stop().animate({"height":hei+"px"}, speed); // bans클래스에 변수hei+px값의 높이와 속도를 호출
+	function fadeAni() {
+		$(window).trigger("resize");
+		$(".cycle-pager span").removeClass("cycle-pager-active");
+		$(".cycle-pager span").eq(now).addClass("cycle-pager-active");
+		var hei = $slide.eq(now).height();
+		$(".bans").stop().animate({"height":hei+"px"}, speed);
 		$slide.eq(now).css({"z-index":depth++, "opacity":0}).stop().animate({"opacity":1}, speed, function(){
-			//클릭당한 li의 순번에 z-index가 증가하면서 이미지페이드의 css를 만들고 투명도1과 속도 및 함수를 호출
-			if(now == end) now = 0; //now번째와 end번째가 같으면 now는 초기화 
-			else now++; //아니라면 now는 증가
+			//여기는 애니메이션 완료된 직후
+			$slide.children("div").removeClass("aniset").css({
+				"animation-name":"none",
+				"animation-fill-mode":"backwards",
+			});
+			$(this).children("div").each(function(){
+				$(this).addClass("aniset");
+				$(this).css({
+					"animation-name":$(this).data("ani"),
+					"animation-delay":$(this).data("delay"),
+					"animation-duration":$(this).data("speed"),
+					"animation-fill-mode":"forwards"
+				});
+			});
+			if(now == end) now = 0;
+			else now++;
 		});
 	}
 }
@@ -285,7 +299,7 @@ function vertShow() {
 	//초기화
 	$slide.each(function(i){
 		if(i<end) $(".cycle-pager").append("<span>●</span>");
-	});//0,1,2까지 사이클 페이저 생성
+	});
 	$(".cycle-pager span").click(function(){
 		now = $(this).index();
 		vertAni();
@@ -313,4 +327,168 @@ function vertShow() {
 			else now++;
 		});
 	}
+}
+
+/***** hover Animation *****/
+$(".hov_ani").each(function(){
+	$(this).css({"position":"relative"});
+	$(this).append(`
+		<ul class="hov_mask" style="display:none">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	`);
+	$(this).mouseenter(function(){
+		var speed = 250;
+		var $mask = $(this).children(".hov_mask");
+		$mask.fadeIn(speed);
+		$mask.children("li").eq(0).stop().animate({"width":$mask.width()-20+"px"}, speed);
+		$mask.children("li").eq(1).stop().animate({"width":$mask.width()-20+"px"}, speed);
+		$mask.children("li").eq(2).stop().animate({"height":$mask.height()-20+"px"}, speed);
+		$mask.children("li").eq(3).stop().animate({"height":$mask.height()-20+"px"}, speed);
+	});
+	$(this).mouseleave(function(){
+		var speed = 125;
+		var $mask = $(this).children(".hov_mask");
+		$mask.fadeOut(speed);
+		$mask.children("li").eq(0).stop().animate({"width":"50%"}, speed);
+		$mask.children("li").eq(1).stop().animate({"width":"50%"}, speed);
+		$mask.children("li").eq(2).stop().animate({"height":"50%"}, speed);
+		$mask.children("li").eq(3).stop().animate({"height":"50%"}, speed);
+	});
+});
+
+/***** .prds Ajax 연동 *****/
+new Ajax("../json/woman.json", prdInit);
+new Ajax("../json/man.json", prdInit);
+function prdInit(data) {
+	var cate = data.cate;
+	var arr = [data.all.latest, data.all.top, data.all.best];
+	/*
+	log("data => ", data);
+	log("data.wos => ", data.wos);
+	log("data.wos.latest => ", data.wos.latest);
+	log("arr => ", arr);
+	log("arr[0] => ", arr[0]);
+	log("arr[0][0] => ", arr[0][0]);
+	*/
+	var html = '';
+	var v;
+	for(var i in arr) {
+		html = `<ul class="clear">`;
+		for(var j in arr[i]) {
+			v = arr[i][j];
+			html += `
+			<li class="prds">
+				<ul class="prd">
+					<li>
+						<img src="${v.img1}" data-src="${v.img2}" class="img prd_img">`;
+			if(v.hot ) html += `<div class="icon_hot">HOT</div>`;
+			if(v.sale) html += `<div class="icon_sale">SALE</div>`;
+			html += `			
+						<div class="prd_mask"></div>
+						<div class="icon_cart prd_icon aniset" data-over="bottomShow2" data-out="bottomHide2" data-speed="0.3s"
+							data-delay="0">
+							<i class="fa fa-shopping-cart"></i>
+						</div>
+						<div class="icon_like prd_icon aniset" data-over="bottomShow2" data-out="bottomHide2" data-speed="0.3s"
+							data-delay="0.2s">
+							<i class="fa fa-heart-o"></i>
+						</div>
+						<div class="icon_search prd_icon aniset" data-over="bottomShow2" data-out="bottomHide2" data-speed="0.3s"
+							data-delay="0.4s">
+							<i class="fa fa-search"></i>
+						</div>
+					</li>
+					<li>${v.tit}</li>
+					<li>`;
+			for(var k=1; k<=5; k++) {
+				if(k <= v.star) html += `<i class="fa fa-star"></i>`;
+				else html += `<i class="fa fa-star-o"></i>`; 
+			}					
+			html += `		
+					</li>
+					<li>
+						<span>${v.price}</span>
+					</li>
+				</ul>
+			</li>`;
+		}
+		html += `</ul>`;
+		$("#"+cate).append(html);
+	}
+	// 모든 데이터가 DOM에 적용된 상태
+	$("#"+cate).imagesLoaded(function(){
+		$("#"+cate).find(".spinner").hide(0);
+		$(window).resize(function(){
+			$("#"+cate).height($("#"+cate).find("ul").eq(0).height());
+		}).trigger("resize");
+		$("#"+cate).find(".prd").mouseenter(prdHover);
+		$("#"+cate).find(".prd").mouseleave(prdLeave);
+		$("#"+cate).prev().find(".ghost_bt").eq(0).trigger("click");
+	});
+}
+
+
+
+
+/***** .prds 버튼 이벤트 *****/
+$(".ghost_bt").mouseenter(function(){
+	$(this).children("div").css({"transition":"transform 0.2s", "transform":"scale(1)"});
+});
+$(".ghost_bt").mouseleave(function(){
+	$(this).children("div").css({"transition":"transform 0.1s", "transform":"scale(0)"});
+});
+$(".ghost_bt").click(function(){
+	var $parent = $(this).parent().parent().parent();
+	$(".ghost_bt", $parent).css({"background-color":"", "color":"", "border":""});
+	$(this).css({"background-color":"#333", "color":"#fff", "border":"1px solid #333"});
+	var idx = $(this).index();
+	$parent.find(".prd_conts > ul").stop().animate({"margin-top":"50px", "opacity":0}, 300, function(){
+		$(this).css({"display":"none"});
+	});
+	$parent.find(".prd_conts > ul").eq(idx).css({"display":"block"}).stop().animate({"margin-top":0, "opacity":1}, 300);
+});
+
+/***** .prds 상품 애니메이션 *****/
+function prdHover() {
+	imgSwap($(this).find(".prd_img"));
+	var $mask = $(this).find(".prd_mask");
+	var $icon = $(this).find(".prd_icon");
+	$mask.stop().fadeIn(200);
+	$icon.each(function(){
+		var name = $(this).data("over");
+		var speed = $(this).data("speed");
+		var delay = $(this).data("delay");
+		aniInit($(this), name, speed, delay);
+	});
+}
+function prdLeave() {
+	imgSwap($(this).find(".prd_img"));
+	var $mask = $(this).find(".prd_mask");
+	var $icon = $(this).find(".prd_icon");
+	$mask.stop().fadeOut(200);
+	$icon.each(function(){
+		var name = $(this).data("out");
+		var speed = $(this).data("speed");
+		var delay = $(this).data("delay");
+		aniInit($(this), name, speed, delay);
+	});
+}
+function imgSwap(obj) {
+	var src = obj.attr("src");
+	var srcHover = obj.data("src");
+	obj.attr("src", srcHover);
+	obj.data("src", src);
+}
+function aniInit(obj, name, speed, delay) {
+	obj.css({"animation-fill-mode": "backwards"});
+	obj.css({
+		"animation-name": name,
+		"animation-duration": speed,
+		"animation-delay": delay,
+		"animation-fill-mode": "forwards"
+	});
 }
