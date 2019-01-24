@@ -199,16 +199,42 @@ ul.prd > :nth-child(4) {font-size:0.875em; font-weight:bold;}
 .apis h3 {font-weight:bolder; color:#333;}
 .bt_more {border-bottom:none; font-size:0.75em;}
 
-.posts > ul, .customers > ul {margin-top:2.5rem;}
+.posts > ul, .customers > div {margin-top:2.5rem;}
 .post {width:50%; float:left; padding-right:5%; font-size:0.75rem;}
 .post > ul > li:nth-child(1) {font-weight:bolder; color:#666; font-size:1.125em; line-height:2em;}
 .post > ul > li:nth-child(2) {color:#aaa; line-height:2em;}
 .post > ul > li:nth-child(3) {padding:1rem 0;}
-.post > ul > li:nth-child(4) {}
 
-.customers .pic{width: 30%; float: left; padding-right: 2rem;}
-.customers .pic_1 img {border-radius: 50%; }
-.customers ul > li{margin-top: 1rem;}
-.customers ul > li:nth-child(1){font-size: 12px; color: #666; line-height: 17px;}
-.customers ul > li:nth-child(2){font-size:17px; font-weight: bolder;}
-.customers ul > li:nth-child(3){color:#999;}
+.customers {position:relative;}
+.customer {font-size:0.75em; position:absolute; width:100%;}
+div.c_wrap {position:relative; overflow:hidden;}
+ul.c_slide {position:relative;}
+.customer:nth-child(1) {left:0;}
+.customer:nth-child(2) {left:100%;}
+.customer:nth-child(3) {left:200%;}
+.customer > div {width:20%; float:left; border-radius:50%; overflow:hidden;}
+.customer > ul {width:80%; float:left; padding-left:5%;}
+.customer > ul > li:nth-child(2) {margin-top:0.5rem; color:#333;}
+.customer > ul > li:nth-child(3) {margin-top:0.25rem; color:#aaa;}
+
+/*********footer***********/
+footer{background-color: #f1f1f1; padding: 3rem 0;}
+.footers > li{width:25%; padding:2%; float: left; font-size:0.75rem; line-height: 2rem;}
+.footer h5 {padding:0.5rem 0; font-weight:bold;}
+
+.copys{margin:3rem auto;}
+.copy {float: left; font-size: 0.75em; color:#999;}
+.payment {float: right;}
+/*********brands***********/
+.brands{margin:2rem auto;}
+.brands > li{float: left; width:16.66%; text-align:center; padding: 3%;}
+
+/*********brands***********/
+.links{margin: 2rem 0.5%;}
+.links > li{width:33%; float: left;}
+.links > li:nth-child(2){margin: 0 0.5%;}
+
+/*********brands***********/
+.tops{width:60px; height:60px; border:2px solid #ccc; border-radius:50%; text-align: center; position:fixed; bottom:5%; right:2%; cursor: pointer; background-color: rgba(255,255,255,.3); z-index: 65535; display: none;}
+.tops > i {font-size:1.5rem; line-height: 55px;}
+.tops > i:hover{color:#333;}
